@@ -50,7 +50,7 @@ do
             echo "-------------------------"
         ;;
         *)
-         echo "Default"
+         echo "exit"
         break # Exit loop
     esac
 done
