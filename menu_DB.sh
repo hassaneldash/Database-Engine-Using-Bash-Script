@@ -13,7 +13,7 @@ PATH=$PATH:~/bash_script
         echo "DB Initiated"
     fi
 
-select var in "Create DB" "List DB" "Connect DB" "Remove DB" "Exit the Program"
+select var in "Create Database" "List DB" "Connect Database" "Remove Database" "Exit the Program"
 do 
     case $var in 
         "Create DB")
@@ -51,10 +51,10 @@ do
 
             #!/bin/bash
 
-                echo "************Databases**********"
+                echo "************ Databases ************"
                 if [[ -e ./.db ]]; then
                     ls -F ./.db | grep / | tr '/' ' '
-                    read -p "Enter DB Name : " name
+                    read -p "Please, Enter DB Name : " name
 
                     if [[ -d ./.db/$name ]]; then
                         echo "Connecting to $name...."
