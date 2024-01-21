@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 PS3="Select From Table Menu:"
-cd ~/.db/$1
+cd ./.db/$1
 
 
 select var in "Create table" "List table" "Drop table" "Insert to table" "Select From table" "Delete From table" "Update From table"  "Exit"
@@ -16,7 +16,7 @@ do
             if [[ ! $name = [0-9]* ]];then
     
                 #make name of table :
-                touch "${name}.sh"
+                touch "${name}"
 
                 #make 3 columns and take the value 
                 #so 3 values : 
@@ -31,10 +31,10 @@ do
                 read -p "Enter Third columns:" string
 
                 #make variable to save file name with .sh
-                source_file="${name}.sh"
+                source_file="${name}"
 
                 #we must give file mod u+x $source_file
-                chmod u+x "${name}.sh"
+                chmod u+x "${name}"
 
                 #save in file that make with $name with path
                 echo "id=\"$id\"" >> "$source_file"
@@ -55,14 +55,14 @@ do
         ;;
         "List table")
             echo "----------------------------"
-            echo ~/.db/$1 | ls -l | tr '/' ' '
+            echo ./.db/$1 | ls -l | tr '/' ' '
             echo "----------------------------"
         ;;
         "Drop table")
             echo "-------------------------"
             read -p "Enter table Name : " name
-            if [[ -f ~/.db/$1/$name ]];then
-                rm -r ~/.db/$1/$name
+            if [[ -f $name ]];then
+                rm -r $name
                 echo "table [ $name ] deleted..."
             else 
                echo "Sorry I Can't find it"
@@ -73,7 +73,7 @@ do
          "Insert to table")
             echo "-------------------------"
             read -p "Enter table Name : " name
-            if [[ -f ~/.db/$1/$name ]];then
+            if [[ -f $name ]];then
 
              #Here we will make function to check unique id
                 function check_unique_id {
@@ -190,8 +190,16 @@ do
 
 
         ;;
-        *)
-         echo "exit"
+        "Exit")
+         echo "1-Create DB" 
+         echo "2-List DB"
+         echo "3-Connect DB"
+         echo "4-Remove DB"
+         echo "5-Exit the Program"
         break # Exit loop
+        ;;
+        *)
+        echo "Wrong Choice"
+        ;;
     esac
 done

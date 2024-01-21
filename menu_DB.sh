@@ -2,24 +2,28 @@
 
 PS3="Select From Menu: "
 PATH=$PATH:~/bash_script
-    # if [[ -d ~/.db ]];
-    # then
-    #     echo "Aleardy Exist"
-    # else 
-    #     mkdir ~/.db
-    # fi
 
-select var in "Create DB" "List DB" "Connect DB" "Remove DB"
+
+    if [[ -d ././.db ]];
+    then
+        echo "Already Exist"
+        pwd
+    else 
+        mkdir ./.db
+        echo "DB Initiated"
+    fi
+
+select var in "Create DB" "List DB" "Connect DB" "Remove DB" "Exit the Program"
 do 
     case $var in 
         "Create DB")
             read -p "Enter DB Name : " name
             name=`echo $name | tr " " "_"`
             if [[ ! $name = [0-9]* ]];then
-                if [[ -e ~/.db/$name ]];then
+                if [[ -e ./.db/$name ]];then
                     echo "Error Folder Already Exist"
                 else 
-                    mkdir ~/.db/$name 
+                    mkdir ./.db/$name 
                 fi
             else
                 echo "Error PLease Try Again"
@@ -27,30 +31,62 @@ do
         ;;
         "List DB")
             echo "----------------------------"
-            ls -F ~/.db | grep / | tr '/' ' '
+            ls -F ./.db | grep / | tr '/' ' '
             echo "----------------------------"
         ;;
         "Connect DB")
-            read -p "Enter DB Name : " name
-            if [[ -d ~/.db/$name ]];then
-                echo "connect to $name...."
-                #cd ~/.db/$name 
-                source ~/bash_script/menu_Table.sh $name
-            fi
+            # echo "************Databases**********"
+            # ls -F ./.db | grep / | tr '/' ' '
+            # if [[ ! -d ./.db ]];then 
+            #     echo "There is No Database please create new one"
+            # else 
+            #  if [[ -d ./.db/$name ]];then
+            #     read -p "Enter DB Name : " name
+            #     echo "connect to $name...."
+            #         chmod u+rwx ./.db/$name
+            #         menu_Table.sh $name
+            #         pwd
+            #     fi
+            # fi
+
+            #!/bin/bash
+
+                echo "************Databases**********"
+                if [[ -e ./.db ]]; then
+                    ls -F ./.db | grep / | tr '/' ' '
+                    read -p "Enter DB Name : " name
+
+                    if [[ -d ./.db/$name ]]; then
+                        echo "Connecting to $name...."
+                        chmod u+rwx ./.db/$name
+                        ./menu_Table.sh $name
+                        pwd
+                    else
+                        echo "Database $name does not exist."
+                    fi
+                fi
         ;;
         "Remove DB")
-            echo "-------------------------"
-            read -p "Enter DB Name : " name
-            if [[ -d ~/.db/$name ]];then
-                rm -r ~/.db/$name
-                echo "DB [ $name ] deleted..."
+            ls .db
+            read -p "Which Database Do you want to Delete : " dbDeletion
+            read -p "if you want to delete for Yes Press Y and No press N : " answer
+            if [[ -e ./.db/$dbDeletion ]];then
+                if [[ "$answer" == [yY] ]];then
+                    rm -r ./.db/$dbDeletion
+                    echo "Database Succesfully Deleted"
+                else 
+                    echo Going Back to menu
+                fi
             else 
-               echo "Sorry I Can't find it"
+                echo Database Doesnt Exist
             fi
-            echo "-------------------------"
+
+        ;;
+        "Exit the Program")
+            echo "Thank For using The Script"
+            break # Exit loop
         ;;
         *)
-         echo "exit"
-        break # Exit loop
+        echo "Invalid Choice"
     esac
 done
