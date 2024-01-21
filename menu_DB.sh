@@ -13,7 +13,7 @@ PATH=$PATH:~/bash_script
         echo "DB Initiated"
     fi
 
-select var in "Create Database" "List DB" "Connect Database" "Remove Database" "Exit the Program"
+select var in "Create DB" "List DB" "Connect DB" "Remove DB" "Exit the Program"
 do 
     case $var in 
         "Create DB")
@@ -35,22 +35,6 @@ do
             echo "----------------------------"
         ;;
         "Connect DB")
-            # echo "************Databases**********"
-            # ls -F ./.db | grep / | tr '/' ' '
-            # if [[ ! -d ./.db ]];then 
-            #     echo "There is No Database please create new one"
-            # else 
-            #  if [[ -d ./.db/$name ]];then
-            #     read -p "Enter DB Name : " name
-            #     echo "connect to $name...."
-            #         chmod u+rwx ./.db/$name
-            #         menu_Table.sh $name
-            #         pwd
-            #     fi
-            # fi
-
-            #!/bin/bash
-
                 echo "************ Databases ************"
                 if [[ -e ./.db ]]; then
                     ls -F ./.db | grep / | tr '/' ' '

@@ -173,11 +173,11 @@ do
             echo "Item number : [ $num ] updated successfully."
         ;;
         "Exit")
-            echo "1- Create Database" 
-            echo "2- List Database"
-            echo "3- Connect Database"
-            echo "4- Remove Database"
-            echo "5- Exit the Program"
+            echo "1-Create DB" 
+            echo "2-List DB"
+            echo "3-Connect DB"
+            echo "4-Remove DB"
+            echo "5-Exit the Program"
             break # Exit loop
         ;;
         *)
