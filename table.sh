@@ -117,6 +117,7 @@ do
         "Insert to table")
             echo "-------------------------"
             read -p "Please, Enter table Name, Dr.Mina <3 : " name
+            source_file="${name}"
             if [[ -f $name ]]; then
 
                 # Here we will make a function to check unique id
@@ -126,10 +127,11 @@ do
                 }
 
                 # Here I will make a while loop until entering a unique id
+                # make variable to save file name with .sh
                 while true;
                 do
                     # first columns
-                    read -p "Please, Enter first columns value, Dr.Mina <3:" id
+                    read -p "Please, Enter first columns value As PK, Dr.Mina <3:" id
 
                     if check_unique_id "$id"; then
                         echo "Sorry , Dr.Mina <3 ; ID is not unique. Please enter a unique ID."
@@ -138,21 +140,21 @@ do
                     fi 
                 done
             
-                # second columns 
-                read -p "Please, Enter Second Columns value, Dr.Mina <3:" type
-                # third columns 
-                read -p "Please, Enter Third columns value, Dr.Mina <3:" string 
-            
+                # # second columns 
+                # read -p "Please, Enter Second Columns value, Dr.Mina <3:" type
+                # # third columns 
+                # read -p "Please, Enter Third columns value, Dr.Mina <3:" string 
+                # # save in file that make with $name with path
+                # echo "value=\"$id\"" >> "$source_file"
+                # # now save in file that make #name with path
+                # echo "value=\"$type\"" >> "$source_file"
+                # # now save in file that make #name with path
+                # echo "value=\"$string\"" >> "$source_file"
 
-                # make variable to save file name with .sh
-                source_file="${name}"
-                
-                # save in file that make with $name with path
-                echo "id=\"$id\"" >> "$source_file"
-                # now save in file that make #name with path
-                echo "type=\"$type\"" >> "$source_file"
-                # now save in file that make #name with path
-                echo "string=\"$string\"" >> "$source_file"
+                for ((i = 1; i <= num_columns; i++)); do
+                    read -p "Enter Data for Column $i: " data
+                    echo -n "$data : " >> "$source_file"
+                done
 
                 echo "Values inserted successfully, Dr.Mina <3."
                 
