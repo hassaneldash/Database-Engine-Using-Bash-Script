@@ -215,7 +215,7 @@ do
             echo "3-Connect DB"
             echo "4-Remove DB"
             echo "5-Exit"
-            break # Exit loop
+            break
         ;;
         *)
             echo "Sorry , Dr.Mina <3 ; Wrong Choice"

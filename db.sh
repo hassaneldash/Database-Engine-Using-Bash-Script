@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 PS3=$'---------------------------- \nSelect From Main Menu: '
-PATH=$PATH:~/bash_script
+#PATH=$PATH:~/bash_script
 
 
     if [[ -d ././.db ]];
@@ -84,7 +84,7 @@ do
         ;;
         "Exit")
             echo "Thank You, Dr.Mina <3 The best instructor, Engineer and Linux user Ever <3"
-            echo "<3<3<3<3<3<3<3<3<3<3<3<3"
+            echo "<3 <3 <3"
             break # Exit loop
         ;;
         *)
