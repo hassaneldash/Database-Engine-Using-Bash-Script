@@ -151,6 +151,7 @@ do
                 do
                     # first columns
                     read -p "Please, Enter first columns value As PK, Dr.Mina <3: " id
+                    
 
                     if check_unique_id "$id"; then
                         echo "Sorry , Dr.Mina <3 ; ID is not unique. Please enter a unique ID."
@@ -169,8 +170,8 @@ do
                 # echo "value=\"$type\"" >> "$source_file"
                 # # now save in file that make #name with path
                 # echo "value=\"$string\"" >> "$source_file"
-
-                for ((i = 1; i <= num_columns; i++)); do
+                echo -n "$id : " >> "$source_file"
+                for ((i = 2; i <= num_columns; i++)); do
                     read -p "Enter Data for Column $i: " data
                     echo -n "$data : " >> "$source_file"
                 done
