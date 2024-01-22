@@ -29,7 +29,7 @@ do
             name=`echo $name | tr " " "_"`
             if [[ ! $name = [0-9]* ]];then
                 if [[ -e ./.db/$name ]];then
-                    echo "Sorry , Dr.Mina <3 ; Folder Already Exist"
+                    echo "Sorry , Dr.Mina <3 ; Databse Already Exist"
                 else 
                     mkdir ./.db/$name 
                     chmod u+rwx ./.db/$name

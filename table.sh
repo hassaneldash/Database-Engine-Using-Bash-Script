@@ -66,7 +66,7 @@ do
                     chmod u+rwx ./$dbname/$name  ##../$name/$name.meta
                     arr=()
                     for ((i=1; i<=$num_columns; i++)); do
-                        read -p "Please,Enter Column [$i] Name, Dr.Mina <3: : " col
+                        read -p "Please,Enter Column [$i] Name, Dr.Mina <3: " col
                         select data in "Integer" "String"
                         do
                             case $data in
@@ -92,7 +92,7 @@ do
                     echo "" >> $name 
                     echo -n "$datatype" >> $name.meta 
             
-                    echo "Table '$name' created successfully, Dr.Mina <3"
+                    echo "Table '$name' created successfully, Dr.Mina <3."
                 fi
             else
                 echo "Sorry , Dr.Mina <3 ; There is an error, Invalid name."
@@ -147,7 +147,7 @@ do
                 while true;
                 do
                     # first columns
-                    read -p "Please, Enter first columns value As PK, Dr.Mina <3:" id
+                    read -p "Please, Enter first columns value As PK, Dr.Mina <3: " id
 
                     if check_unique_id "$id"; then
                         echo "Sorry , Dr.Mina <3 ; ID is not unique. Please enter a unique ID."
