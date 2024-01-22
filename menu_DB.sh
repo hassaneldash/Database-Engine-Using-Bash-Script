@@ -62,12 +62,12 @@ do
                     echo Going Back to menu
                 fi
             else 
-                echo Database Doesnt Exist
+                echo "Database Doesn't Exist"
             fi
 
         ;;
         "Exit the Program")
-            echo "Thank For using The Script"
+            echo "Thank you Dr.Mina"
             break # Exit loop
         ;;
         *)
