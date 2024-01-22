@@ -56,6 +56,11 @@ do
             # fi
 
             read -p "Please, Enter table Name, Dr.Mina <3 : " name
+            if [[ $name == *['!'@#\$%^\&*()-+\.\/]* ]]; then
+                echo 
+                echo "! @ # $ % ^ () + . -  are not allowed!"
+                continue
+            fi
             name=`echo "$name" | tr " " "_"`
             if [[ $name =~ ^[a-zA-Z_]+$  ]]; then
                 if [[ -f ./$dbname/$name ]]; then
@@ -118,6 +123,11 @@ do
             ls | grep -v '\.meta$' | tr '/' ' '
             echo "--------------------------------------------------------"
             read -p "Please, Enter table Name, Dr.Mina <3 : " name
+            if [[ $name == *['!'@#\$%^\&*()-+\.\/]* ]]; then
+                    echo 
+                    echo "! @ # $ % ^ () + . -  are not allowed!"
+                    continue
+                fi
             if [[ -f $name ]]; then
                 rm -r "$name"
                 rm -r "$name.meta"
@@ -136,6 +146,11 @@ do
             ls | grep -v '\.meta$' | tr '/' ' '
             echo "--------------------------------------------------------"
             read -p "Please, Enter table Name, Dr.Mina <3 : " name
+            if [[ $name == *['!'@#\$%^\&*()-+\.\/]* ]]; then
+                echo 
+                echo "! @ # $ % ^ () + . -  are not allowed!"
+                continue
+            fi
             source_file="${name}"
             if [[ -f $name ]]; then
 
@@ -193,6 +208,11 @@ do
             echo "--------------------------------------------------------"
             # read table name you want to Select
             read -p "Please, Enter table Name, Dr.Mina <3 : " name
+            if [[ $name == *['!'@#\$%^\&*()-+\.\/]* ]]; then
+                echo 
+                echo "! @ # $ % ^ () + . -  are not allowed!"
+                continue
+            fi
             if [[ -f "$name" ]]; then
                 # show with cat table selected with number of items
                 cat -n "$name" 
@@ -218,7 +238,12 @@ do
             # delete item from table 
 
             # read table name you want to Select
-            read -p "Please, Enter table Name, Dr.Mina <3 : " name 
+            read -p "Please, Enter table Name, Dr.Mina <3 : " name
+            if [[ $name == *['!'@#\$%^\&*()-+\.\/]* ]]; then
+                    echo 
+                    echo "! @ # $ % ^ () + . -  are not allowed!"
+                    continue
+                fi
             # show with cat table selected with number of items
             cat -n "$name" 
             # Extract the line with the specified ID using sed
@@ -248,6 +273,11 @@ do
 
             # read table name you want to Select
             read -p "Please, Enter table Name, Dr.Mina <3 : " name 
+            if [[ $name == *['!'@#\$%^\&*()-+\.\/]* ]]; then
+                echo 
+                echo "! @ # $ % ^ () + . -  are not allowed!"
+                continue
+            fi
             # show with cat table selected with number of items
             cat -n "$name" 
             # Extract the line with the specified ID using sed

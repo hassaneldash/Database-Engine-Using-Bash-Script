@@ -57,6 +57,11 @@ do
                     ls -F ./.db | grep / | tr '/' ' '
                     echo "--------------------------------------------------------"
                     read -p "Please, enter DB name, Dr.Mina <3 : " name
+                    if [[ $name == *['!'@#\$%^\&*()-+\.\/]* ]]; then
+                            echo 
+                            echo "! @ # $ % ^ () + . -  are not allowed!"
+                            continue
+                        fi
 
                     if [[ -d ./.db/$name ]]; then
                         echo "Connecting to $name...."
