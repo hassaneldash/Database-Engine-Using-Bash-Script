@@ -116,6 +116,7 @@ do
         ;;
         "Insert to table")
             echo "-------------------------"
+            ls | grep -v '\.meta$' | tr '/' ' '
             read -p "Please, Enter table Name, Dr.Mina <3 : " name
             source_file="${name}"
             if [[ -f $name ]]; then
@@ -164,6 +165,7 @@ do
             echo "-------------------------"
         ;;
         "Select From table")
+            ls | grep -v '\.meta$' | tr '/' ' '
             # read table name you want to Select
             read -p "Please, Enter table Name, Dr.Mina <3 : " name
             if [[ -f "$name" ]]; then
@@ -178,6 +180,7 @@ do
             fi
         ;;
         "Delete From table")
+            ls | grep -v '\.meta$' | tr '/' ' '
             # read name of table
             # select item from table 
             # delete item from table 
@@ -198,6 +201,7 @@ do
             echo "Item number : [ $num ] deleted successfully, Dr.Mina <3."
         ;;
         "Update From table")
+            ls | grep -v '\.meta$' | tr '/' ' '
             # select table name 
             # select item want to update with read 
             # update and after enter make change and save with 
