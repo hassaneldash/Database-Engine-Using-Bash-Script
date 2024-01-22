@@ -97,10 +97,21 @@ do
             else
                 echo "Sorry , Dr.Mina <3 ; There is an error, Invalid name."
             fi
+            echo "--------------------------------------------------------"
+            echo "1) Create table       5) Select From table"
+            echo "2) List table         6) Delete From table"
+            echo "3) Drop table         7) Update From table"
+            echo "4) Insert to table    8) Exit"
+
         ;;
         "List table")
-            echo "----------------------------"
+            echo "--------------------------------------------------------"
             ls | grep -v '\.meta$' | tr '/' ' '
+            echo "--------------------------------------------------------"
+            echo "1) Create table       5) Select From table"
+            echo "2) List table         6) Delete From table"
+            echo "3) Drop table         7) Update From table"
+            echo "4) Insert to table    8) Exit"
         ;;
         "Drop table")
             echo "-------------------------"
@@ -112,7 +123,11 @@ do
             else 
                 echo "Sorry , Dr.Mina <3 ; There is an error, Can't find Table."
             fi
-            echo "-------------------------"
+            echo "--------------------------------------------------------"
+            echo "1) Create table       5) Select From table"
+            echo "2) List table         6) Delete From table"
+            echo "3) Drop table         7) Update From table"
+            echo "4) Insert to table    8) Exit"
         ;;
         "Insert to table")
             echo "-------------------------"
@@ -162,7 +177,11 @@ do
             else
                 echo "Sorry , Dr.Mina <3 ; There is an error, Please, Enter the name of an existing table."
             fi
-            echo "-------------------------"
+            echo "--------------------------------------------------------"
+            echo "1) Create table       5) Select From table"
+            echo "2) List table         6) Delete From table"
+            echo "3) Drop table         7) Update From table"
+            echo "4) Insert to table    8) Exit"
         ;;
         "Select From table")
             ls | grep -v '\.meta$' | tr '/' ' '
@@ -178,6 +197,11 @@ do
             else
                 echo "Sorry , Dr.Mina <3 ; Table not found."
             fi
+            echo "--------------------------------------------------------"
+            echo "1) Create table       5) Select From table"
+            echo "2) List table         6) Delete From table"
+            echo "3) Drop table         7) Update From table"
+            echo "4) Insert to table    8) Exit"
         ;;
         "Delete From table")
             ls | grep -v '\.meta$' | tr '/' ' '
@@ -199,6 +223,11 @@ do
             # use sed to delete number with $id and added d to remove
             sed -i "${num}d"  "$name"
             echo "Item number : [ $num ] deleted successfully, Dr.Mina <3."
+            echo "--------------------------------------------------------"
+            echo "1) Create table       5) Select From table"
+            echo "2) List table         6) Delete From table"
+            echo "3) Drop table         7) Update From table"
+            echo "4) Insert to table    8) Exit"
         ;;
         "Update From table")
             ls | grep -v '\.meta$' | tr '/' ' '
@@ -223,6 +252,11 @@ do
             awk -v id="$old_id" -v new_number="$new_data" '{if(NR==id) print new_number; else print $0}' "$name" > modifiy_file && mv modifiy_file "$name"
 
             echo "Item number : [ $num ] updated successfully, Dr.Mina <3."
+            echo "--------------------------------------------------------"
+            echo "1) Create table       5) Select From table"
+            echo "2) List table         6) Delete From table"
+            echo "3) Drop table         7) Update From table"
+            echo "4) Insert to table    8) Exit"
         ;;
         "Exit")
             echo "1-Create DB" 
