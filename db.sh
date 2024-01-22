@@ -7,7 +7,7 @@ PS3=$'---------------------------- \nSelect From Main Menu: '
     if [[ -d ././.db ]];
     then
         echo "--------------------------------------------------------"
-        echo "Sorry , Dr.Mina <3 ; There is an error, Datbase already exists"
+        echo "Sorry , Dr.Mina <3 ; Datbase already exists"
         echo "--------------------------------------------------------"
         echo "Current Directory is: "
         echo "-----------------------"
@@ -29,7 +29,7 @@ do
             name=`echo $name | tr " " "_"`
             if [[ ! $name = [0-9]* ]];then
                 if [[ -e ./.db/$name ]];then
-                    echo "Sorry , Dr.Mina <3 ; There is an error, Folder Already Exist"
+                    echo "Sorry , Dr.Mina <3 ; Folder Already Exist"
                 else 
                     mkdir ./.db/$name 
                     chmod u+rwx ./.db/$name
@@ -65,11 +65,11 @@ do
         ;;
         "Remove DB")
             ls .db
-            read -p "Which Database Do you want to Delete, Dr.Mina <3 : " dbDeletion
+            read -p "Which Database Do you want to delete, Dr.Mina <3 : " dbDelete
             read -p "Dr.Mina <3 for Yes Press Y and No press N : " answer
-            if [[ -e ./.db/$dbDeletion ]];then
+            if [[ -e ./.db/$dbDelete ]];then
                 if [[ "$answer" == [yY] ]];then
-                    rm -r ./.db/$dbDeletion
+                    rm -r ./.db/$dbDelete
                     echo "Database Succesfully Deleted, Dr.Mina <3"
                     echo "--------------------------------------------------------"
                 else 

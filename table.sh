@@ -1,10 +1,11 @@
 #!/usr/bin/bash
 
 PS3=$'---------------------------- \nSelect From Table Menu: '
-current_db="$1"  # Save the current database in a variable
+# current_db="$1"  # Save the current database in a variable
 
-# Change directory to the script's directory
-cd "$(dirname "${BASH_SOURCE[0]}")/.db/$current_db"
+# # Change directory to the script's directory
+# cd "$(dirname "${BASH_SOURCE[0]}")/.db/$current_db"
+cd ./.db/$1
 
 select var in "Create table" "List table" "Drop table" "Insert to table" "Select From table" "Delete From table" "Update From table" "Exit"
 do 
@@ -62,7 +63,7 @@ do
                 else 
                     read -p "Please, Enter Count Columns, Dr.Mina <3: " num_columns
                     touch ./$dbname/$name  ## ../$name/$name.meta
-                    chmod u+x ./$dbname/$name  ##../$name/$name.meta
+                    chmod u+rwx ./$dbname/$name  ##../$name/$name.meta
                     arr=()
                     for ((i=1; i<=$num_columns; i++)); do
                         read -p "Please,Enter Column [$i] Name, Dr.Mina <3: : " col
@@ -79,6 +80,14 @@ do
                     echo -n " $col : " >> $name.meta 
                     echo -n " $col : " >> $name 
                     done
+
+                # # Add primary key option
+                #     read -p "Please, Enter Primary Key Name, Dr.Mina <3: " pk_name
+                #     read -p "Please, Enter Primary Key Type (Integer/String), Dr.Mina <3: " pk_type
+                #     echo "Primary Key: $pk_name, Type: $pk_type" >> $name.meta
+                #     echo "pk_name=\"$pk_name\"" >> "$name"
+                #     echo "pk_type=\"$pk_type\"" >> "$name"
+
                     echo "" >> $name.meta 
                     echo "" >> $name 
                     echo -n "$datatype" >> $name.meta 
