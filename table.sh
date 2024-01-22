@@ -114,7 +114,9 @@ do
             echo "4) Insert to table    8) Exit"
         ;;
         "Drop table")
-            echo "-------------------------"
+            echo "--------------------------------------------------------"
+            ls | grep -v '\.meta$' | tr '/' ' '
+            echo "--------------------------------------------------------"
             read -p "Please, Enter table Name, Dr.Mina <3 : " name
             if [[ -f $name ]]; then
                 rm -r "$name"
@@ -130,8 +132,9 @@ do
             echo "4) Insert to table    8) Exit"
         ;;
         "Insert to table")
-            echo "-------------------------"
+            echo "--------------------------------------------------------"
             ls | grep -v '\.meta$' | tr '/' ' '
+            echo "--------------------------------------------------------"
             read -p "Please, Enter table Name, Dr.Mina <3 : " name
             source_file="${name}"
             if [[ -f $name ]]; then
@@ -184,7 +187,9 @@ do
             echo "4) Insert to table    8) Exit"
         ;;
         "Select From table")
+            echo "--------------------------------------------------------"
             ls | grep -v '\.meta$' | tr '/' ' '
+            echo "--------------------------------------------------------"
             # read table name you want to Select
             read -p "Please, Enter table Name, Dr.Mina <3 : " name
             if [[ -f "$name" ]]; then
@@ -204,7 +209,9 @@ do
             echo "4) Insert to table    8) Exit"
         ;;
         "Delete From table")
+            echo "--------------------------------------------------------"
             ls | grep -v '\.meta$' | tr '/' ' '
+            echo "--------------------------------------------------------"
             # read name of table
             # select item from table 
             # delete item from table 
@@ -230,7 +237,9 @@ do
             echo "4) Insert to table    8) Exit"
         ;;
         "Update From table")
+            echo "--------------------------------------------------------"
             ls | grep -v '\.meta$' | tr '/' ' '
+            echo "--------------------------------------------------------"
             # select table name 
             # select item want to update with read 
             # update and after enter make change and save with 
