@@ -172,7 +172,7 @@ do
                 # echo "value=\"$string\"" >> "$source_file"
                 echo -n "$id : " >> "$source_file"
                 for ((i = 2; i <= num_columns; i++)); do
-                    read -p "Enter Data for Column $i: " data
+                    read -p "Please, Enter Data for Column $i , Dr.Mina <3: " data
                     echo -n "$data : " >> "$source_file"
                 done
 
