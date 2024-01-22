@@ -51,9 +51,9 @@ do
             echo "2) List DB     4) Remove DB"
         ;;
         "Connect DB")
+                echo "--------------------------------------------------------"
                 echo "************ Existing Databases ************"
                 if [[ -e ./.db ]]; then
-                    echo "--------------------------------------------------------"
                     ls -F ./.db | grep / | tr '/' ' '
                     echo "--------------------------------------------------------"
                     read -p "Please, enter DB name, Dr.Mina <3 : " name
@@ -74,9 +74,11 @@ do
                 echo "2) List DB     4) Remove DB"
         ;;
         "Remove DB")
-            ls .db
+            echo "--------------------------------------------------------"
+            ls -F ./.db | grep / | tr '/' ' '
+            echo "--------------------------------------------------------"
             read -p "Which Database Do you want to delete, Dr.Mina <3 : " dbDelete
-            read -p "Dr.Mina <3 for Yes Press Y and No press N : " answer
+            read -p "Are you Sure Dr.Mina <3? for Yes Press Y and No press N : " answer
             if [[ -e ./.db/$dbDelete ]];then
                 if [[ "$answer" == [yY] ]];then
                     rm -r ./.db/$dbDelete
