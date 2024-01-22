@@ -38,10 +38,17 @@ do
             else
                 echo "Sorry , Dr.Mina <3 ; There is an error, Please Try Again"
             fi
+            echo "--------------------------------------------------------"
+            echo "1) Create DB   3) Connect DB  5) Exit"
+            echo "2) List DB     4) Remove DB"
+
         ;;
         "List DB")
             echo "--------------------------------------------------------"
             ls -F ./.db | grep / | tr '/' ' '
+            echo "--------------------------------------------------------"
+            echo "1) Create DB   3) Connect DB  5) Exit"
+            echo "2) List DB     4) Remove DB"
         ;;
         "Connect DB")
                 echo "************ Existing Databases ************"
@@ -62,6 +69,9 @@ do
                         echo "--------------------------------------------------------"
                     fi
                 fi
+                echo "--------------------------------------------------------"
+                echo "1) Create DB   3) Connect DB  5) Exit"
+                echo "2) List DB     4) Remove DB"
         ;;
         "Remove DB")
             ls .db
@@ -80,6 +90,9 @@ do
                 echo "Database Doesn't exist, Dr.Mina <3"
                 echo "--------------------------------------------------------"
             fi
+            echo "--------------------------------------------------------"
+            echo "1) Create DB   3) Connect DB  5) Exit"
+            echo "2) List DB     4) Remove DB"
 
         ;;
         "Exit")
