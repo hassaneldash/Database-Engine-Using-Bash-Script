@@ -43,6 +43,12 @@ do
             echo "2) List DB     4) Remove DB"
 
         ;;
+
+
+
+
+
+
         "List DB")
             echo "--------------------------------------------------------"
             ls -F ./.db | grep / | tr '/' ' '
@@ -50,8 +56,13 @@ do
             echo "1) Create DB   3) Connect DB  5) Exit"
             echo "2) List DB     4) Remove DB"
         ;;
+
+
+
+
+
+
         "Connect DB")
-                echo "--------------------------------------------------------"
                 echo "************ Existing Databases ************"
                 if [[ -e ./.db ]]; then
                     ls -F ./.db | grep / | tr '/' ' '
@@ -78,6 +89,15 @@ do
                 echo "1) Create DB   3) Connect DB  5) Exit"
                 echo "2) List DB     4) Remove DB"
         ;;
+
+
+
+
+
+
+
+
+
         "Remove DB")
             echo "--------------------------------------------------------"
             ls -F ./.db | grep / | tr '/' ' '
@@ -102,11 +122,25 @@ do
             echo "2) List DB     4) Remove DB"
 
         ;;
+
+
+
+
+
+
+
+
+
+
+        
         "Exit")
             echo "Thank You, Dr.Mina <3 The best instructor, Engineer and Linux user Ever <3"
             echo "<3 <3 <3"
-            break # Exit loop
+            break
         ;;
+
+
+        
         *)
         echo "Sorry , Dr.Mina <3 ; Invalid Choice"
         echo "--------------------------------------------------------"
