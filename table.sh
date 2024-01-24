@@ -30,8 +30,9 @@ do
                                 "Integer" ) datatype+="<int> :"; break;;
                                 "String" ) datatype+="<str> :"; break;;
                                 * ) 
-                echo "Sorry , Dr.Mina <3 ; Invalid Choice"
-                echo "--------------------------------------------------------";;
+                                    echo "Sorry , Dr.Mina <3 ; Invalid Choice"
+                                    echo "--------------------------------------------------------"
+                                ;;
                             esac
                         done
                     echo -n " $col : " >> $name.meta
@@ -252,7 +253,7 @@ do
                         for ((i=1; i<=columns; i++)); do
                             echo -n "----------------+"
                         done
-                        echo 
+                        echo
                         
                         ;;
                     *)
@@ -279,7 +280,11 @@ do
                     echo "! @ # $ % ^ () + . -  are not allowed, Dr.Mina <3 !"
                     continue
                 fi
-            cat -n "$name" 
+            # cat -n "$name"
+            echo "*********** Table : $name ***********"
+            echo "----------------------------------"
+            awk 'BEGIN{FS=":";OFS="\t |";ORS="\n";}{ $1=$1; print substr($0, 1, length($0)-1) }' "./$name"
+            echo "----------------------------------"
             read -p "Please, Enter item number, Dr.Mina <3 : " num
             sed -n "${num}p" "$name"
             chmod u+rwx "$name" 
