@@ -148,6 +148,7 @@ do
                     if [[ $is_unique == true ]]; then
                         echo -n "$id : " >> "$source_file"
                         for ((i=2; i<=$num_columns; i++)); do
+                            while true; do
                             read -p "Please, Enter Data for Column $i, Dr.Mina <3: " data
                             if [[ $data == *['!'@#\$%^\&*()-+\.\/]* ]]; then
                                 echo
@@ -157,18 +158,21 @@ do
                             colDatatype=$(getDatatype "$i")
                             case $colDatatype in
                                     "<int> ")
-                                        if ! [[ $data =~ ^[0-9]+$ ]]; then
+                                        if [[ $data =~ ^[0-9]+$ ]]; then
+                                        break
+                                        else
                                             echo "Invalid Datatype, Dr.Mina <3."
-                                            continue
                                         fi
                                         ;;
                                     "<str> ")
-                                        if [[ $data =~ ^[0-9]+$ ]]; then
+                                        if [[ ! $data =~ ^[0-9]+$ ]]; then
+                                            break
+                                        else
                                             echo "Invalid Datatype, Dr.Mina <3."
-                                            continue
                                         fi
                                         ;;
                                 esac
+                            done
                             echo -n "$data : " >> "$source_file"
                         done
                         echo " " >> "$source_file"
@@ -307,7 +311,11 @@ do
                 echo "! @ # $ % ^ () + . -  are not allowed, Dr.Mina <3 !"
                 continue
             fi
-            cat -n "$name"
+            # cat -n "$name"
+            echo "*********** Table : $name ***********"
+            echo "----------------------------------"
+            awk 'BEGIN{FS=":";OFS="\t |";ORS="\n";}{ $1=$1; print substr($0, 1, length($0)-1) }' "./$name"
+            echo "----------------------------------"
             read -p "Please, enter row number, Dr.Mina <3 : " num
             if ! [[ $num =~ ^[0-9]+$ ]]; then
                 echo "Invalid item number, please enter a valid number, Dr.Mina <3."
