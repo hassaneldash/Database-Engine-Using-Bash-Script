@@ -89,7 +89,7 @@ do
             read -p "Please, Enter table Name, Dr.Mina <3 : " name
             if [[ $name == *['!'@#\$%^\&*()-+\.\/]* ]]; then
                     echo 
-                    echo "! @ # $ % ^ () + . -  are not allowed!"
+                    echo "! @ # $ % ^ () + . -  are not allowed, Dr.Mina <3 !"
                     continue
                 fi
             if [[ -f $name ]]; then
@@ -122,7 +122,7 @@ do
             read -p "Please, Enter table Name, Dr.Mina <3 : " name
             if [[ $name == *['!'@#\$%^\&*()-+\.\/]* ]]; then
                 echo 
-                echo "! @ # $ % ^ () + . -  are not allowed!"
+                echo "! @ # $ % ^ () + . -  are not allowed, Dr.Mina <3 !"
                 continue
             fi
             source_file="${name}"
@@ -202,19 +202,28 @@ do
                         echo "----------------------------------"
                         ;;
                     2)
-                        echo -e "Enter the column numbers separated by commas (e.g., 1,2,3): "
-                        read columns
-                        echo "Table : $name"
+                        read -p "Enter the column numbers separated by commas (Example: 1,2,3): " columns
+                        echo "*********** Table : $name ***********"
 
-                        echo "----------"
-                        awk -v cols=$columns 'BEGIN{FS=" : ";OFS="|";ORS="\n";}{
-                            split(cols, arr, ",")
+                        awk -v cols="$columns" 'BEGIN{FS=" : "; OFS="\t|"; ORS="\n";}
+                        {
+                            split(cols, arr, ",");
                             for(i=1; i<=length(arr); i++) {
-                                printf $arr[i]"\t |"
+                                printf "+----------------";
                             }
-                            printf "\n"
+                            printf "+";
+                            printf "\n";
+                            for(i=1; i<=length(arr); i++) {
+                                printf "|\t"$arr[i]"\t";
+                            }
+                            printf "|\n";
                         }' "./$name"
-                        echo "----------"
+                        echo -n "+"
+                        for ((i=1; i<=columns; i++)); do
+                            echo -n "----------------+"
+                        done
+                        echo 
+                        
                         ;;
                     *)
                         echo -e "Sorry , Dr.Mina <3 ; Invalid Choice"
@@ -236,7 +245,7 @@ do
             read -p "Please, Enter table Name, Dr.Mina <3 : " name
             if [[ $name == *['!'@#\$%^\&*()-+\.\/]* ]]; then
                     echo 
-                    echo "! @ # $ % ^ () + . -  are not allowed!"
+                    echo "! @ # $ % ^ () + . -  are not allowed, Dr.Mina <3 !"
                     continue
                 fi
             cat -n "$name" 
@@ -267,11 +276,11 @@ do
             read -p "Please, Enter table Name, Dr.Mina <3 : " name 
             if [[ $name == *['!'@#\$%^\&*()-+\.\/]* ]]; then
                 echo 
-                echo "! @ # $ % ^ () + . -  are not allowed!"
+                echo "! @ # $ % ^ () + . -  are not allowed, Dr.Mina <3 !"
                 continue
             fi
             cat -n "$name"
-            read -p "Please, Enter item number, Dr.Mina <3 : " num
+            read -p "Please, Enter item number (row number), Dr.Mina <3 : " num
             if ! [[ $num =~ ^[0-9]+$ ]]; then
                 echo "Invalid item number, please enter a valid number."
                 continue
@@ -280,44 +289,37 @@ do
                 echo "Invalid item number, please enter a valid number."
                 continue
             fi
-            column_names=$(head -n 1 "$name.meta" | tr ":" "\n")
-            echo "Available columns to update:"
-            PS3="Select column to update: "
-            select column in $column_names "Exit"
-            do
-                case $column in
-                    "Exit")
-                        break 2
-                        ;;
-                    *)
-                        read -p "Please, Enter new data for $column, Dr.Mina <3: " new_data
-                        awk -v id="$num" -v col="$column" -v new_data="$new_data" '{
-                            if (NR == 1) {
-                                # Skip the first line (header)
-                                print $0
-                            } else if (NR == id + 1) {
-                                # Update the specified column
-                                for (i = 1; i <= NF; i++) {
-                                    if (i == col) {
-                                        printf "%s", new_data
-                                    } else {
-                                        printf "%s", $i
-                                    }
-                                    if (i < NF) {
-                                        printf ":"
-                                    }
-                                }
-                                printf "\n"
-                            } else {
-                                # Print other lines as they are
-                                print $0
-                            }
-                        }' "$name" > modified_file && mv modified_file "$name"
-                        echo "Column '$column' for item number $num updated successfully, Dr.Mina <3."
-                        break
-                        ;;
-                esac
-            done
+            read -p "Please, Enter column number, Dr.Mina <3: " col
+            if ! [[ $col =~ ^[0-9]+$ ]]; then
+                echo "Invalid column number, please enter a valid number."
+                continue
+            fi
+            if (( col < 1 )) || (( col > $(awk -F: '{print NF; exit}' "$name") )); then
+                echo "Invalid column number, please enter a valid number."
+                continue
+            fi
+            read -p "Please, Enter new data for row $num and column $col, Dr.Mina <3: " new_data
+            awk -v id="$num" -v col="$col" -v new_data="$new_data" '{
+                if (NR == id) {
+                    # Update the specified column
+                    split($0, fields, ":")
+                    for (i = 1; i <= length(fields); i++) {
+                        if (i == col) {
+                            printf "%s", new_data
+                        } else {
+                            printf "%s", fields[i]
+                        }
+                        if (i < length(fields)) {
+                            printf ":"
+                        }
+                    }
+                    printf "\n"
+                } else {
+                    # Print other lines as they are
+                    print $0
+                }
+            }' "$name" > modified_file && mv modified_file "$name"
+            echo "Row $num, Column $col updated successfully, Dr.Mina <3."
             echo "--------------------------------------------------------"
             echo "1) Create table       5) Show data"
             echo "2) List table         6) Delete row"
