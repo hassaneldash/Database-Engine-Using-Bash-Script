@@ -3,7 +3,7 @@
 PS3=$'---------------------------- \nSelect From Table Menu: '
 cd ./.db/$1
 
-select var in "Create table" "List table" "Drop table" "Insert row" "Show data" "Delete row" "Update row" "Exit"
+select var in "Create table" "List table" "Drop table" "Insert row" "Show data" "Delete row" "Update cell" "Exit"
 do 
     case $var in
         "Create table")
@@ -43,10 +43,11 @@ do
             else
                 echo "Sorry , Dr.Mina <3 ; There is an error, Invalid name."
             fi
+            echo
             echo "--------------------------------------------------------"
             echo "1) Create table       5) Show data"
             echo "2) List table         6) Delete row"
-            echo "3) Drop table         7) Update row"
+            echo "3) Drop table         7) Update cell"
             echo "4) Insert row         8) Exit"
         ;;
 
@@ -63,10 +64,11 @@ do
         "List table")
             echo "--------------------------------------------------------"
             ls | grep -v '\.meta$' | tr '/' ' '
+            echo
             echo "--------------------------------------------------------"
             echo "1) Create table       5) Show data"
             echo "2) List table         6) Delete row"
-            echo "3) Drop table         7) Update row"
+            echo "3) Drop table         7) Update cell"
             echo "4) Insert row         8) Exit"
         ;;
 
@@ -99,10 +101,11 @@ do
             else 
                 echo "Sorry , Dr.Mina <3 ; There is an error, Can't find Table."
             fi
+            echo
             echo "--------------------------------------------------------"
             echo "1) Create table       5) Show data"
             echo "2) List table         6) Delete row"
-            echo "3) Drop table         7) Update row"
+            echo "3) Drop table         7) Update cell"
             echo "4) Insert row         8) Exit"
         ;;
 
@@ -126,6 +129,9 @@ do
                 continue
             fi
             source_file="${name}"
+            function getDatatype {
+                awk -v col="$1" 'NR==2 {split($0, types, ":"); print types[col]}' "$name.meta"
+            }
             if [[ -f $name ]]; then
                 while true; do
                     read -p "Please, Enter first columns value As PK, Dr.Mina <3: " id
@@ -143,7 +149,26 @@ do
                         echo -n "$id : " >> "$source_file"
                         for ((i=2; i<=$num_columns; i++)); do
                             read -p "Please, Enter Data for Column $i, Dr.Mina <3: " data
-                            awk -f ':' '{if(NR==2) print $i}' "$name.meta"
+                            if [[ $data == *['!'@#\$%^\&*()-+\.\/]* ]]; then
+                                echo
+                                echo "! @ # $ % ^ () + . -  are not allowed, Dr.Mina <3 !"
+                                continue
+                            fi
+                            colDatatype=$(getDatatype "$i")
+                            case $colDatatype in
+                                    "<int> ")
+                                        if ! [[ $data =~ ^[0-9]+$ ]]; then
+                                            echo "Invalid Datatype, Dr.Mina <3."
+                                            continue
+                                        fi
+                                        ;;
+                                    "<str> ")
+                                        if [[ $data =~ ^[0-9]+$ ]]; then
+                                            echo "Invalid Datatype, Dr.Mina <3."
+                                            continue
+                                        fi
+                                        ;;
+                                esac
                             echo -n "$data : " >> "$source_file"
                         done
                         echo " " >> "$source_file"
@@ -155,10 +180,11 @@ do
             else
                 echo "Sorry , Dr.Mina <3 ; There is an error, Please, Enter the name of an existing table."
             fi
+            echo
             echo "--------------------------------------------------------"
             echo "1) Create table       5) Show data"
             echo "2) List table         6) Delete row"
-            echo "3) Drop table         7) Update row"
+            echo "3) Drop table         7) Update cell"
             echo "4) Insert row         8) Exit"
         ;;
 
@@ -229,9 +255,10 @@ do
                         echo -e "Sorry , Dr.Mina <3 ; Invalid Choice"
                         ;;
             esac
+            echo
             echo "1) Create table       5) Show data"
             echo "2) List table         6) Delete row"
-            echo "3) Drop table         7) Update row"
+            echo "3) Drop table         7) Update cell"
             echo "4) Insert row         8) Exit"
         ;;
 
@@ -254,10 +281,11 @@ do
             chmod u+rwx "$name" 
             sed -i "${num}d"  "$name"
             echo "Item number : [ $num ] deleted successfully, Dr.Mina <3."
+            echo
             echo "--------------------------------------------------------"
             echo "1) Create table       5) Show data"
             echo "2) List table         6) Delete row"
-            echo "3) Drop table         7) Update row"
+            echo "3) Drop table         7) Update cell"
             echo "4) Insert row         8) Exit"
         ;;
 
@@ -269,7 +297,7 @@ do
 
 
 
-        "Update row")
+        "Update cell")
             echo "--------------------------------------------------------"
             ls | grep -v '\.meta$' | tr '/' ' '
             echo "--------------------------------------------------------"
@@ -280,22 +308,22 @@ do
                 continue
             fi
             cat -n "$name"
-            read -p "Please, Enter item number (row number), Dr.Mina <3 : " num
+            read -p "Please, enter row number, Dr.Mina <3 : " num
             if ! [[ $num =~ ^[0-9]+$ ]]; then
-                echo "Invalid item number, please enter a valid number."
+                echo "Invalid item number, please enter a valid number, Dr.Mina <3."
                 continue
             fi
             if (( num < 1 )) || (( num > $(wc -l < "$name") )); then
-                echo "Invalid item number, please enter a valid number."
+                echo "Invalid item number, please enter a valid number, Dr.Mina <3."
                 continue
             fi
-            read -p "Please, Enter column number, Dr.Mina <3: " col
+            read -p "Please, enter column number, Dr.Mina <3: " col
             if ! [[ $col =~ ^[0-9]+$ ]]; then
-                echo "Invalid column number, please enter a valid number."
+                echo "Invalid column number, please enter a valid number, Dr.Mina <3."
                 continue
             fi
             if (( col < 1 )) || (( col > $(awk -F: '{print NF; exit}' "$name") )); then
-                echo "Invalid column number, please enter a valid number."
+                echo "Invalid column number, please enter a valid number, Dr.Mina <3."
                 continue
             fi
             read -p "Please, Enter new data for row $num and column $col, Dr.Mina <3: " new_data
@@ -320,10 +348,11 @@ do
                 }
             }' "$name" > modified_file && mv modified_file "$name"
             echo "Row $num, Column $col updated successfully, Dr.Mina <3."
+            echo
             echo "--------------------------------------------------------"
             echo "1) Create table       5) Show data"
             echo "2) List table         6) Delete row"
-            echo "3) Drop table         7) Update row"
+            echo "3) Drop table         7) Update cell"
             echo "4) Insert row         8) Exit"
             ;;
 

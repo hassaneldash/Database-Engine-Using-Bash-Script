@@ -26,6 +26,11 @@ do
         "Create DB")
             echo "--------------------------------------------------------"
             read -p "Please, enter DB name, Dr.Mina <3 : " name
+            if [[ $name == *['!'@#\$%^\&*()-+\.\/]* ]]; then
+                echo 
+                echo "! @ # $ % ^ () + . -  are not allowed, Dr.Mina <3 !"
+                continue
+            fi
             name=`echo $name | tr " " "_"`
             if [[ ! $name = [0-9]* ]];then
                 if [[ -e ./.db/$name ]];then
@@ -36,8 +41,9 @@ do
                     echo "DB created successfully, Dr.Mina <3"
                 fi
             else
-                echo "Sorry , Dr.Mina <3 ; There is an error, Please Try Again"
+                echo "Sorry , Dr.Mina <3 ; Invalid name, Please Try Again"
             fi
+            echo
             echo "--------------------------------------------------------"
             echo "1) Create DB   3) Connect DB  5) Exit"
             echo "2) List DB     4) Remove DB"
@@ -52,6 +58,7 @@ do
         "List DB")
             echo "--------------------------------------------------------"
             ls -F ./.db | grep / | tr '/' ' '
+            echo
             echo "--------------------------------------------------------"
             echo "1) Create DB   3) Connect DB  5) Exit"
             echo "2) List DB     4) Remove DB"
@@ -69,10 +76,10 @@ do
                     echo "--------------------------------------------------------"
                     read -p "Please, enter DB name, Dr.Mina <3 : " name
                     if [[ $name == *['!'@#\$%^\&*()-+\.\/]* ]]; then
-                            echo 
-                            echo "! @ # $ % ^ () + . -  are not allowed!"
-                            continue
-                        fi
+                        echo 
+                        echo "! @ # $ % ^ () + . -  are not allowed!"
+                        continue
+                    fi
 
                     if [[ -d ./.db/$name ]]; then
                         echo "Connecting to $name...."
@@ -85,6 +92,7 @@ do
                         echo "--------------------------------------------------------"
                     fi
                 fi
+                echo
                 echo "--------------------------------------------------------"
                 echo "1) Create DB   3) Connect DB  5) Exit"
                 echo "2) List DB     4) Remove DB"
@@ -117,6 +125,7 @@ do
                 echo "Database Doesn't exist, Dr.Mina <3"
                 echo "--------------------------------------------------------"
             fi
+            echo
             echo "--------------------------------------------------------"
             echo "1) Create DB   3) Connect DB  5) Exit"
             echo "2) List DB     4) Remove DB"
@@ -134,7 +143,7 @@ do
 
         
         "Exit")
-            echo "Thank You, Dr.Mina <3 The best instructor, Engineer and Linux user Ever <3"
+            echo "Thank You, Dr.Mina <3 The best instructor, Engineer and Linux Giant Ever <3"
             echo "<3 <3 <3"
             break
         ;;
